@@ -2,9 +2,6 @@
 <html>
 <head>
     <meta charset="utf-8"/>
-    <!--
-    <base href="/webshopcase.mob/" />
-    -->
     <title>Web Shop Case</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
     <meta name="apple-mobile-web-app-capable" content="yes"/>
@@ -24,10 +21,12 @@
 
     <!-- Required to use $touch, $swipe, $drag and $translate services -->
     <script src="dist/js/mobile-angular-ui.gestures.min.js"></script>
-    <script src="demo.js"></script>
+    
+    <script src="app.js"></script>
+    <script src="shop.js"></script>
 </head>
 
-<body   ng-app="WebShopCaseMobAngularJS"
+<body   ng-app="webShopCase"
         ng-controller="MainController"
         ui-prevent-touchmove-defaults>
 

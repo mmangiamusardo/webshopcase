@@ -1,19 +1,16 @@
-// 
-// Here is how to define your module 
-// has dependent on mobile-angular-ui
-// 
-var app = angular.module('WebShopCaseMobAngularJS', [
-  'ngRoute',
-  'mobile-angular-ui',
+//(function() {
+
+
+    var app = angular.module('webShopCase', ['ngRoute','mobile-angular-ui',
   
-  // touch/drag feature: this is from 'mobile-angular-ui.gestures.js'
-  // it is at a very beginning stage, so please be careful if you like to use
-  // in production. This is intended to provide a flexible, integrated and and 
-  // easy to use alternative to other 3rd party libs like hammer.js, with the
-  // final pourpose to integrate gestures into default ui interactions like 
-  // opening sidebars, turning switches on/off ..
-  'mobile-angular-ui.gestures'
-]);
+      // touch/drag feature: this is from 'mobile-angular-ui.gestures.js'
+      // it is at a very beginning stage, so please be careful if you like to use
+      // in production. This is intended to provide a flexible, integrated and and 
+      // easy to use alternative to other 3rd party libs like hammer.js, with the
+      // final pourpose to integrate gestures into default ui interactions like 
+      // opening sidebars, turning switches on/off ..
+      'mobile-angular-ui.gestures'
+    ]);
 
 app.run(function($transform) {
   window.$transform = $transform;
@@ -254,7 +251,7 @@ app.directive('dragMe', ['$drag', function($drag){
 // For this trivial demo we have just a unique MainController 
 // for everything
 //
-app.controller('MainController', function($rootScope, $scope){
+app.controller('MainController', function($rootScope, $scope,$log, shop){
 
   $scope.swiped = function(direction) {
     alert('Swiped ' + direction);
@@ -347,4 +344,27 @@ app.controller('MainController', function($rootScope, $scope){
       $scope.notices.splice(index, 1);
     }
   };
+
+
+  $log.info("Getting  articles ");
+  
+  shop.getArticles().then(onComplete, onError);
+
+  
+
+  var onComplete = function(data) {
+      /*
+      $scope.user = data;
+      github.getRepos($scope.user.repos_url).then(onRepos, onError)
+      */
+      $scope.articles = data;
+  };
+ 
+  var onError = function(reason) {
+      $scope.error = "Could not fetch data.";
+  };
+
 });
+
+
+//}); // end IIF
