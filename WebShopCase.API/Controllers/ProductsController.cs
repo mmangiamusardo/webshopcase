@@ -5,11 +5,10 @@ using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
-using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
-//using WebShopCase.API;
 using WebShopCase.Models;
+using WebShopCase.API.Utilities;
 
 namespace WebShopCase.API.Controllers
 {
@@ -20,18 +19,19 @@ namespace WebShopCase.API.Controllers
         // GET: api/Products
         public IQueryable<ProductDTO> GetProducts()
         {
-            var prods = from p in db.Products.Include(cat =>cat.Category)
+            var prods = from p in db.Products.Include(cat => cat.Category).ToList()
                         select new ProductDTO()
                         {
-                            ProductID = p.ProductID,
-                            ProductName = p.ProductName,
-                            UnitPrice = p.UnitPrice,
-                            CategoryID = p.CategoryID,
-                            CategoryName = p.Category.CategoryName,
-                            CategoryPct = p.Category.Picture
+                            ProductID = p.ProductID
+                            , ProductName = p.ProductName
+                            , UnitPrice = p.UnitPrice
+                            , ProductPct = p.Picture
+                            ,CategoryID = p.CategoryID
+                            ,CategoryName = p.Category.CategoryName
+                            //,CategoryPct = ConvertTo.Base64(p.Category.Picture)
                         };
 
-            return prods;
+            return prods.AsQueryable();
         }
 
         // GET: api/Products/5

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace WebShopCase.Models
 {
-    public class ProductDTO
+    public class ProductDetailsDTO
     {
         public int ProductID { get; set; }
         public string ProductName { get; set; }

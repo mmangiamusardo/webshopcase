@@ -218,6 +218,7 @@
     <Compile Include="Models\Article.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\ProductDetailsDTO.cs" />
     <Compile Include="Models\ProductDTO.cs" />
     <Compile Include="Models\Product.cs" />
     <Compile Include="Models\WebShopCaseContext.cs" />
@@ -225,6 +226,7 @@
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />
     <Compile Include="Results\ChallengeResult.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="Utils.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\webshopcase.mdf" />

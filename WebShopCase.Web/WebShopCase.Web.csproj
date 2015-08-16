@@ -76,7 +76,10 @@
     <Content Include="dist\js\mobile-angular-ui.min.js.map" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="app2.js" />
     <Content Include="article.html" />
+    <Content Include="controllers.js" />
+    <Content Include="services.js" />
     <Content Include="shop.js" />
     <Content Include="demo.css" />
     <Content Include="app.js" />

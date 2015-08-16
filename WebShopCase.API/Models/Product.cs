@@ -15,6 +15,7 @@ namespace WebShopCase.Models
         public Nullable<short> UnitsOnOrder { get; set; }
         public Nullable<short> ReorderLevel { get; set; }
         public bool Discontinued { get; set; }
+        public string Picture { get; set; }
 
         /*
         public Nullable<int> SupplierID { get; set; }

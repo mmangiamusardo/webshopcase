@@ -247,11 +247,8 @@ app.directive('dragMe', ['$drag', function($drag){
   };
 }]);
 
-//
-// For this trivial demo we have just a unique MainController 
-// for everything
-//
-app.controller('MainController', function($rootScope, $scope,$log, shop){
+
+app.controller('MainController', function ($rootScope, $http, $scope, $log, shop) {
 
   $scope.swiped = function(direction) {
     alert('Swiped ' + direction);
@@ -345,18 +342,15 @@ app.controller('MainController', function($rootScope, $scope,$log, shop){
     }
   };
 
+  $scope.articles = [];
 
   $log.info("Getting  articles ");
   
   shop.getArticles().then(onComplete, onError);
 
-  
+  $log.info("End getting  articles ");
 
   var onComplete = function(data) {
-      /*
-      $scope.user = data;
-      github.getRepos($scope.user.repos_url).then(onRepos, onError)
-      */
       $scope.articles = data;
   };
  
