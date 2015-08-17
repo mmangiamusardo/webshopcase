@@ -78,6 +78,7 @@
   <ItemGroup>
     <Content Include="app2.js" />
     <Content Include="article.html" />
+    <Content Include="detail.html" />
     <Content Include="controllers.js" />
     <Content Include="services.js" />
     <Content Include="shop.js" />

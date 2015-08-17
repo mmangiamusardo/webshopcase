@@ -43,87 +43,57 @@
             }
         });
 
+        $routeProvider.when('/article/:id', {
+            templateUrl: 'detail.html',
+            controller: 'ArticleDetailsCtrl',
+            resolve: {
+                /*
+                productId: ['$route', function ($route) {
+                    var params = $route.current.params;
+                    params.productId =  params.productId || 123;
+                }],
+                */
+                article: function (srvShop, $route) {
+                    return srvShop.getArticle($route.current.params.id);
+                }
+            }
+        });
+
         $routeProvider.otherwise({ redirectTo: '/' });
 
     }]);
 
 
     // Controller definition
-    /*
-    var MainController = function ($rootScope, $http, $scope, $log, shop) {
-
-        // I determine if remote data is currently being loaded.
-        $scope.isLoading = false;
-
-        // I contain the data that we wan to render.
-        $scope.articles = [];
-
-        var onComplete = function (data) {
-            $scope.articles = data;
-            $scope.$apply();
+    var MainController = function ($rootScope, $scope, $log) {
+        
+        $scope.sum = function(items, prop){
+            return items.reduce( function(a, b){
+                return a + b[prop];
+            }, 0);
         };
+        
+        
+        $scope.VAT = 0.22;
+        $rootScope.cart = [];
 
-        var onError = function (reason) {
-            $scope.error = "Could not fetch data.";
+        $scope.sizeCart = 0;
+        $scope.totalCart = 0.0;
+
+        $rootScope.updateCart = function () {
+            var _rtScoope = this;
+            $scope.sizeCart = _rtScoope.cart.length;
         };
+        $rootScope.updateCart();
 
-        // User agent displayed in home page
-        $scope.userAgent = navigator.userAgent;
-
-        // Needed for the loading screen
-        $rootScope.$on('$routeChangeStart', function () {
-            $rootScope.loading = true;
-        });
-
-        $rootScope.$on('$routeChangeSuccess', function () {
-            $rootScope.loading = false;
-        });
-
-        // I hold the handle on the current request for data. Since we want to
-        // be able to abort the request, mid-stream, we need to hold onto the
-        // request which will have the .abort() method on it.
-
-        var requestForArticles = null;
-        // ---
-        // PUBLIC METHODS.
-        // ---
-        // I abort the current request (if its running).
-        $scope.abortRequest = function () {
-            return (requestForFriends && requestForFriends.abort());
+        $rootScope.cartTotal = function (total) {
+            var _rtScoope = this;
+            $scope.totalCart = $scope.sum(_rtScoope.cart, 'subTotal');
         };
-
-
-        //requestForFriends = shop.getArticles().then(onComplete, onError);
-
-        // I load the remote data for the view.
-        $scope.loadData = function() {
-            // Flag the data is currently being loaded.
-            $scope.isLoading = true;
-            $scope.articles = [];
-            // Make a request for data. Note that we are saving a reference to
-            // this response rather than just piping it directly into a .then()
-            // call. This is because we need to be able to access the .abort()
-            // method on the request and we'll lose that original reference after
-            // we call the .then() method.
-            (requestForArticles = shop.getArticles()).then(
-                function( data ) {
-                    // Flag the data as loaded.
-                    $scope.isLoading = false;
-                    $scope.articles = data;
-                },
-                function( errorMessage ) {
-                    // Flag the data as loaded (or rather, done trying to load). loading).
-                    $scope.isLoading = false;
-                    console.warn( "Request for friends was rejected." );
-                    console.info( "Error:", errorMessage );
-                }
-            );
-        };
-
-    }
-    */
+        $rootScope.cartTotal();
+    };
 
     // Controller registration
-    //app.controller("MainController", ["$rootScope", "$scope", "$http", "$log", "shop", MainController]);
+    app.controller("MainController", ["$rootScope","$scope", "$log", MainController]);
 
 }());

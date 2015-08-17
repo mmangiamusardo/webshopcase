@@ -34,19 +34,20 @@
 </head>
 
 <body   ng-app="wscApp"
-        ui-prevent-touchmove-defaults>
+        ui-prevent-touchmove-defaults
+        ng-controller="MainController">
 
-<!-- Sidebars -->
-<div ng-include="'sidebar.html'"
-     ui-track-as-search-param='true'
-     class="sidebar sidebar-left"></div>
+    <!-- Sidebars -->
+    <div ng-include="'sidebar.html'"
+         ui-track-as-search-param='true'
+         class="sidebar sidebar-left"></div>
 
-<div ng-include="'sidebarRight.html'"
-     class="sidebar sidebar-right"></div>
+    <div ng-include="'sidebarRight.html'"
+        class="sidebar sidebar-right"></div>
 
-<div class="app"
-     ui-swipe-right='Ui.turnOn("uiSidebarLeft")'
-     ui-swipe-left='Ui.turnOff("uiSidebarLeft")'>
+    <div class="app"
+         ui-swipe-right='Ui.turnOn("uiSidebarLeft")'
+         ui-swipe-left='Ui.turnOff("uiSidebarLeft")'>
 
     <!-- Navbars -->
     <div class="navbar navbar-app navbar-absolute-top">
@@ -61,12 +62,9 @@
         </div>
 
         <div class="btn-group pull-right" ui-yield-to="navbarAction">
-            <div ui-toggle="uiSidebarRight" class="btn">
-                <!--
-                <i class="fa fa-comment"></i> Chat
-                -->
-                Total 35 <i class="fa fa-eur"></i>
-                <i class="fa fa-shopping-cart fa-1x"> 3 Articles</i>
+            <div class="btn">
+                <i class="fa fa-shopping-cart fa-1x"></i><span style="padding-left:5px;padding-right:5px">{{sizeCart}}</span>
+                <i class="fa fa-eur" style="padding-left:5px"></i><span style="padding-left:5px;padding-right:5px">{{totalCart}}</span>
             </div>
         </div>
 
