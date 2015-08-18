@@ -14,31 +14,24 @@ namespace WebShopCase.API.Controllers
 {
     public class ProductsController : ApiController
     {
-        private WebShopCaseContext db = new WebShopCaseContext();
+        IProductRepository _repository;
+        public ProductsController(IProductRepository repository)
+        {
+            _repository = repository;
+        }
+
 
         // GET: api/Products
         public IQueryable<ProductDTO> GetProducts()
         {
-            var prods = from p in db.Products.Include(cat => cat.Category).ToList()
-                        select new ProductDTO()
-                        {
-                            ProductID = p.ProductID
-                            , ProductName = p.ProductName
-                            , UnitPrice = p.UnitPrice
-                            , ProductPct = p.Picture
-                            ,CategoryID = p.CategoryID
-                            ,CategoryName = p.Category.CategoryName
-                            //,CategoryPct = ConvertTo.Base64(p.Category.Picture)
-                        };
-
-            return prods.AsQueryable();
+            return _repository.GetProducts();
         }
 
         // GET: api/Products/5
         [ResponseType(typeof(Product))]
-        public IHttpActionResult GetProducts(int id)
+        public IHttpActionResult GetProduct(int id)
         {
-            Product product = db.Products.Find(id);
+            Product product = _repository.GetProduct(id);
             if (product == null)
             {
                 return NotFound();
@@ -47,6 +40,7 @@ namespace WebShopCase.API.Controllers
             return Ok(product);
         }
 
+        /*
         // PUT: api/Products/5
         [ResponseType(typeof(void))]
         public IHttpActionResult PutProduct(int id, Product product)
@@ -112,19 +106,6 @@ namespace WebShopCase.API.Controllers
 
             return Ok(product);
         }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
-
-        private bool ProductExists(int id)
-        {
-            return db.Products.Count(e => e.ProductID == id) > 0;
-        }
+        */
     }
 }

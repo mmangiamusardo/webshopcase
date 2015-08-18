@@ -59,6 +59,16 @@
             }
         });
 
+        $routeProvider.when('/cart', {
+            templateUrl: 'cart.html',
+            controller: 'CartCtrl'
+        });
+
+        $routeProvider.when('/order', {
+            templateUrl: 'order.html',
+            controller: 'OrderCtrl'
+        });
+
         $routeProvider.otherwise({ redirectTo: '/' });
 
     }]);
@@ -75,6 +85,7 @@
         
         
         $scope.VAT = 0.22;
+        $scope.VATdescr = '22%';
         $rootScope.cart = [];
 
         $scope.sizeCart = 0;

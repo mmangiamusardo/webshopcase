@@ -13,8 +13,8 @@ ctrl.controller('HomeCtrl', ['$scope', HomeCtrl]);
 var ArticleCtrl = function ($scope, $rootScope, articles) {
     $scope.articles = articles.data;
   
-    $scope.addToCart = function (id, qty, price) {
-        $rootScope.cart.push({ itemId: id, cartQty: qty, unitPrice: price, subTotal: (price * qty)});
+    $scope.addToCart = function (id, qty, price, name) {
+        $rootScope.cart.push({ productId: id, cartQty: qty, unitPrice: price, productName: name, subTotal: (price * qty) });
         $rootScope.cartTotal();
         $rootScope.updateCart();
     };
@@ -26,9 +26,21 @@ var ArticleDetailsCtrl = function ($scope, $rootScope, article) {
     $scope.articleDetail = article.data;
 
     $scope.addToCart = function (id, qty, price) {
-        $rootScope.cart.push({ itemId: id, cartQty: qty, unitPrice: price, subTotal: (price * qty) });
+        $rootScope.cart.push({ productId: id, cartQty: qty, unitPrice: price, subTotal: (price * qty) });
         $rootScope.cartTotal();
         $rootScope.updateCart();
     };
 };
 ctrl.controller('ArticleDetailsCtrl', ['$scope', '$rootScope', 'article', ArticleDetailsCtrl]);
+
+
+var OrderCtrl = function ($scope, $rootScope) {
+   
+};
+ctrl.controller('OrderCtrl', ['$scope', '$rootScope', OrderCtrl]);
+
+
+var CartCtrl = function ($scope, $rootScope) {
+
+};
+ctrl.controller('CartCtrl', ['$scope', '$rootScope', CartCtrl]);
