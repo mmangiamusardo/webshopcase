@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Net;
 using System.Web.Http;
+using System.Threading.Tasks;
 
 namespace WebShopCase.Models
 {
@@ -13,11 +14,11 @@ namespace WebShopCase.Models
         Product GetProduct(int id);
     }
 
-    public interface IOrder
+    public interface IOrderRepository
     {
         //IQueryable<Order> GetOrdersByCustomer(int customerId);
         //Order GetOrder(int id);
-        int Add(Order order);
+        Task<int> Add(Order order);
     }
 
     public interface ICustomer

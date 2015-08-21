@@ -13,6 +13,13 @@ ctrl.controller('HomeCtrl', ['$scope', HomeCtrl]);
 var ArticleCtrl = function ($scope, $rootScope, articles) {
     $scope.articles = articles.data;
   
+    $scope.currentPage = 0;
+    $scope.pageSize = 10;
+    
+    $scope.numberOfPages = function () {
+        return Math.ceil($scope.articles.length / $scope.pageSize);
+    };
+
     $scope.addToCart = function (id, qty, price, name, pct) {
         $rootScope.cart.push({ productId: id, cartQty: qty, unitPrice: price, productName: name, picture : pct });
         $rootScope.cartTotal();
@@ -35,7 +42,20 @@ ctrl.controller('ArticleDetailsCtrl', ['$scope', '$rootScope', 'article', Articl
 
 
 var OrderCtrl = function ($scope, $rootScope) {
-   
+    $scope.firstName = '';
+    $scope.lastName = '';
+    $scope.address = '';
+    $scope.addressNum = '';
+    $scope.zipCode = '';
+    $scope.city = '';
+    $scope.email = '';
+
+    $scope.save = function () {
+        var Order = {};
+        //Order.FirstName = 
+        alert('marco');
+    };
+    //srvShop
 };
 ctrl.controller('OrderCtrl', ['$scope', '$rootScope', OrderCtrl]);
 
