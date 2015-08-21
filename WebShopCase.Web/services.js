@@ -27,7 +27,7 @@ services.factory('srvShop', ['$http', function ($http) {
         },
         
 
-        postOrder: function () {
+        postOrder: function (order) {
             var promise = $http({ method: 'POST', url: 'http://localhost:7054/api/products' })
                             .success(function (data, status, headers, config) {
                                 return data;

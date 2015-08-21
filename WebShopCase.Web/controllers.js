@@ -42,20 +42,44 @@ ctrl.controller('ArticleDetailsCtrl', ['$scope', '$rootScope', 'article', Articl
 
 
 var OrderCtrl = function ($scope, $rootScope) {
-    $scope.firstName = '';
-    $scope.lastName = '';
-    $scope.address = '';
-    $scope.addressNum = '';
-    $scope.zipCode = '';
-    $scope.city = '';
-    $scope.email = '';
+    //Function to Reset Scope variables
+    $scope.initialize = function() {
+        $scope.firstName = '';
+        $scope.lastName = '';
+        $scope.address = '';
+        $scope.addressNum = '';
+        $scope.zipCode = '';
+        $scope.city = '';
+        $scope.email = '';
+
+    };
+
+    $scope.initialize();
+   
 
     $scope.save = function () {
         var Order = {};
-        //Order.FirstName = 
-        alert('marco');
+        Order.FirstName = $scope.firstName;
+        Order.LastName = $scope.lastName;
+        Order.Address = $scope.address;
+        Order.AddressNum = $scope.addressNum;
+        Order.ZipCode = $scope.zipCode;
+        Order.City = $scope.city;
+        Order.Email = $scope.email;
+        
+        /*
+        var promisePost = personInfoService.postInfo(Person);
+        promisePost.then(function (d) {
+            $scope.PersonId = d.data.PersonId;
+        }, function (err) {
+            alert("Some Error Occured ");
+        });
+        */
+
+        var promiseOrder = srvShop.postOrder(Order);
+        promiseOrder.then
     };
-    //srvShop
+    
 };
 ctrl.controller('OrderCtrl', ['$scope', '$rootScope', OrderCtrl]);
 
