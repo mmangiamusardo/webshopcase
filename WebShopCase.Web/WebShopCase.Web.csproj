@@ -79,7 +79,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="cart.html" />
-    <Content Include="order.html" />
     <Content Include="dist\fonts\fontawesome-webfont.eot" />
     <Content Include="dist\fonts\fontawesome-webfont.ttf" />
     <Content Include="dist\fonts\fontawesome-webfont.woff" />
@@ -94,6 +93,7 @@
     <Content Include="article.html" />
     <Content Include="detail.html" />
     <Content Include="controllers.js" />
+    <Content Include="order.html" />
     <Content Include="profile.html" />
     <Content Include="services.js" />
     <Content Include="shop.js" />
