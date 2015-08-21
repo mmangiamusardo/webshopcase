@@ -79,7 +79,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="cart.html" />
-    <Content Include="cart2.html" />
+    <Content Include="order.html" />
     <Content Include="dist\fonts\fontawesome-webfont.eot" />
     <Content Include="dist\fonts\fontawesome-webfont.ttf" />
     <Content Include="dist\fonts\fontawesome-webfont.woff" />

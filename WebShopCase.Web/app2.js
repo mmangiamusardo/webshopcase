@@ -82,26 +82,56 @@
                 return a + b[prop];
             }, 0);
         };
-        
-        
+       
+        $scope.isEmpty = function (obj) {
+            if (Object.getOwnPropertyNames(obj).length > 0)
+                return false;
+            else
+                return true;
+        };
+       
+
         $scope.VAT = 0.22;
         $scope.VATdescr = '22%';
+
         $rootScope.cart = [];
+
+        $scope.subtotals = [];
 
         $scope.sizeCart = 0;
         $scope.totalCart = 0.0;
 
-        $rootScope.updateCart = function () {
-            var _rtScoope = this;
-            $scope.sizeCart = _rtScoope.cart.length;
-        };
-        $rootScope.updateCart();
-
         $rootScope.cartTotal = function (total) {
             var _rtScoope = this;
-            $scope.totalCart = $scope.sum(_rtScoope.cart, 'subTotal');
+
+            // http://jsfiddle.net/3jaJC/1/
+            $scope.subtotals = _rtScoope.cart.reduce(function (c, x) {
+                if (!c[x.productId]) {
+                    c[x.productId] = {
+                        productName: x.productName,
+                        productId: x.productId,
+                        productPct: x.picture,
+                        productPrice : x.unitPrice,
+                        totalQty: 0,
+                        total: 0
+                    };
+                }
+
+                c[x.productId].totalQty += Number(x.cartQty);
+                c[x.productId].total += Number(x.unitPrice);
+
+                return c;
+            }, {});
+
         };
         $rootScope.cartTotal();
+
+        $rootScope.updateCart = function () {
+            var _rtScope = this;
+            $scope.sizeCart = $scope.sum(_rtScope.cart, 'cartQty');
+            $scope.totalCart = $scope.sum(_rtScope.cart, 'unitPrice');
+        };
+        $rootScope.updateCart();
     };
 
     // Controller registration
