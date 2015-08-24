@@ -5,6 +5,7 @@ using System.Web;
 using System.Net;
 using System.Web.Http;
 using System.Threading.Tasks;
+using WebShopCase.API;
 
 namespace WebShopCase.Models
 {
@@ -16,9 +17,14 @@ namespace WebShopCase.Models
 
     public interface IOrderRepository
     {
-        //IQueryable<Order> GetOrdersByCustomer(int customerId);
-        //Order GetOrder(int id);
-        Task<int> Add(Order order);
+        IQueryable<Order> GetOrders();
+        Order GetOrder(int id);
+        int Add(Order order);
+    }
+
+    public interface IOrderDetailRepository
+    {
+        int Add(OrderDetail orderDet);
     }
 
     public interface ICustomer

@@ -7,7 +7,7 @@ services.factory('srvShop', ['$http', function ($http) {
         getArticles: function () {
             var promise = $http({
                 method: 'GET',
-                url: 'http://localhost:7054/api/products'
+                url: 'http://localhost:7054/api/product'
             })
                             .success(function (data, status, headers, config) {
                                 return data;
@@ -18,7 +18,7 @@ services.factory('srvShop', ['$http', function ($http) {
         getArticle: function (id) {
             var promise = $http({
                 method: 'GET',
-                url: 'http://localhost:7054/api/products/' + id
+                url: 'http://localhost:7054/api/product/' + id
             })
                             .success(function (data, status, headers, config) {
                                 return data;
@@ -28,24 +28,20 @@ services.factory('srvShop', ['$http', function ($http) {
         
 
         postOrder: function (order) {
-            var promise = $http({ method: 'POST', url: 'http://localhost:7054/api/products' })
+            
+            var promise = $http({
+                method: 'POST',
+                url: 'http://localhost:7054/api/order',
+                data : order
+            })
                             .success(function (data, status, headers, config) {
                                 return data;
                             });
             return promise;
-
             /*
-            $http.post('/api/trivia', { 'questionId': option.questionId, 'optionId': option.id }).success(function (data, status, headers, config) {
-            $scope.correctAnswer = (data === "true");
-            $scope.working = false;
-                }).error(function (data, status, headers, config) {
-                    $scope.title = "Oops... something went wrong";
-                    $scope.working = false;
-                });
-            
-            
+            var req = $http.post('http://localhost:7054/api/order', order);
+            return req;
             */
-
         },
 
         getOrder: function () {

@@ -7,7 +7,8 @@ using System.ComponentModel.DataAnnotations;
 
 namespace WebShopCase.Models
 {
-    public class Order_Details
+    [Table("OrderDetails")]
+    public class OrderDetail
     {
         [Key]
         public int OrderID { get; set; }

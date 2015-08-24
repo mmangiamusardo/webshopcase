@@ -5,6 +5,7 @@ using System.Net.Http;
 using System.Web.Http;
 using Microsoft.Owin.Security.OAuth;
 using Newtonsoft.Json.Serialization;
+using System.Web.Http.Cors;
 
 using Microsoft.Practices.Unity;
 using WebshopCase.Resolver;
@@ -19,6 +20,8 @@ namespace WebShopCase.API
             // IOC (Unity)          
             var container = new UnityContainer();
             container.RegisterType<IProductRepository, ProductRepository>(new HierarchicalLifetimeManager());
+            container.RegisterType<IOrderRepository, OrderRepository>(new HierarchicalLifetimeManager());
+            container.RegisterType<IOrderDetailRepository, OrderRepository>(new HierarchicalLifetimeManager());
             config.DependencyResolver = new UnityResolver(container);
             
 
@@ -27,8 +30,11 @@ namespace WebShopCase.API
             config.SuppressDefaultHostAuthentication();
             config.Filters.Add(new HostAuthenticationFilter(OAuthDefaults.AuthenticationType));
 
-            
-            
+            // Web API configuration and services
+            var cors = new EnableCorsAttribute("*", "*", "*");
+            config.EnableCors(cors);
+
+
             // Web API routes
             config.MapHttpAttributeRoutes();
 

@@ -12,6 +12,7 @@ using WebShopCase.Models;
 using WebShopCase.API.Utilities;
 using System.Xml;
 using System.Xml.Linq;
+using WebShopCase.API;
 
 namespace WebShopCase.Models
 {

@@ -41,7 +41,7 @@ var ArticleDetailsCtrl = function ($scope, $rootScope, article) {
 ctrl.controller('ArticleDetailsCtrl', ['$scope', '$rootScope', 'article', ArticleDetailsCtrl]);
 
 
-var OrderCtrl = function ($scope, $rootScope) {
+var OrderCtrl = function ($scope, $rootScope, srvShop) {
     //Function to Reset Scope variables
     $scope.initialize = function() {
         $scope.firstName = '';
@@ -56,7 +56,6 @@ var OrderCtrl = function ($scope, $rootScope) {
 
     $scope.initialize();
    
-
     $scope.save = function () {
         var Order = {};
         Order.FirstName = $scope.firstName;
@@ -66,22 +65,16 @@ var OrderCtrl = function ($scope, $rootScope) {
         Order.ZipCode = $scope.zipCode;
         Order.City = $scope.city;
         Order.Email = $scope.email;
-        
-        /*
-        var promisePost = personInfoService.postInfo(Person);
-        promisePost.then(function (d) {
-            $scope.PersonId = d.data.PersonId;
-        }, function (err) {
-            alert("Some Error Occured ");
-        });
-        */
 
         var promiseOrder = srvShop.postOrder(Order);
-        promiseOrder.then
+        promiseOrder.then(function (d) {
+            $scope.OrderId = d.data.OrderID;
+        }, function (err) {
+            alert(err);
+        });
     };
-    
 };
-ctrl.controller('OrderCtrl', ['$scope', '$rootScope', OrderCtrl]);
+ctrl.controller('OrderCtrl', ['$scope', '$rootScope','srvShop', OrderCtrl]);
 
 
 var CartCtrl = function ($scope, $rootScope) {
