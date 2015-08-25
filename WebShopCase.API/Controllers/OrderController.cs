@@ -15,6 +15,7 @@ using WebShopCase.API;
 
 namespace WebShopCase.API.Controllers
 {
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class OrderController : ApiController
     {
         IOrderRepository _ordRep;
@@ -24,16 +25,16 @@ namespace WebShopCase.API.Controllers
         }
 
         // GET: api/Order
-        public IQueryable<Order> GetOrder()
+        public IQueryable<OrderDTO> GetOrder()
         {
             return _ordRep.GetOrders();
         }
 
         // GET: api/Order/5
-        [ResponseType(typeof(Order))]
+        //[ResponseType(typeof(OrderDTO))]
         public IHttpActionResult GetOrder(int id)
         {
-            Order order = _ordRep.GetOrder(id);
+            OrderDTO order = _ordRep.GetOrder(id);
             if (order == null)
             {
                 return NotFound();
@@ -44,7 +45,7 @@ namespace WebShopCase.API.Controllers
 
 
         // POST: api/Order
-        [ResponseType(typeof(Order))]
+        //[ResponseType(typeof(Order))]
         public IHttpActionResult PostOrder(OrderDTO dto)
         {
 
@@ -86,8 +87,9 @@ namespace WebShopCase.API.Controllers
             };
 
             _ordRep.Add(o);
-
-            return Ok(o);
+            dto.OrderID = o.OrderID;
+            return Ok(dto);
+            //return CreatedAtRoute("DefaultApi", new { id = dto.OrderID }, dto);
         }
     }
 }

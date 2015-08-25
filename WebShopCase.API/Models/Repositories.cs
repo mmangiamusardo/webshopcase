@@ -15,18 +15,47 @@ using WebShopCase.API;
 
 namespace WebShopCase.Models
 {
-    public class OrderRepository : IDisposable, IOrderRepository, IOrderDetailRepository
+    public class OrderRepository : IDisposable, IOrderRepository
     {
         private Entities  db = new Entities();
 
-        public IQueryable<Order> GetOrders()
+        public IQueryable<OrderDTO> GetOrders()
         {
-            return db.Orders;
+            var orders = from o in db.Orders.Include(cus => cus.Customer).ToList()
+                         select new OrderDTO()
+                         {
+                                OrderID = o.OrderID
+                              , OrderDate = o.OrderDate
+                              , RequiredDate = o.RequiredDate
+                              , FirstName = o.ShipName
+                              , Address = o.ShipAddress
+                              , City = o.ShipCity
+                              , Country = o.ShipCountry
+                              , ShippedDate = o.ShippedDate
+                              , ZipCode = o.ShipPostalCode
+                              , ShipVia = o.ShipVia
+                              , CustomerName = o.Customer.ContactName 
+                         };
+            return orders.AsQueryable();
         }
 
-        public Order GetOrder(int id)
+        public OrderDTO GetOrder(int id)
         {
-            return db.Orders.Find(id);
+            var o = db.Orders.Find(id);
+            return new OrderDTO()
+            {
+                  OrderID = o.OrderID
+                , OrderDate = o.OrderDate
+                , RequiredDate = o.RequiredDate
+                , FirstName = o.ShipName
+                , Address = o.ShipAddress
+                , City = o.ShipCity
+                , Country = o.ShipCountry
+                , ShippedDate = o.ShippedDate
+                , ZipCode = o.ShipPostalCode
+                , ShipVia = o.ShipVia
+                , CustomerName = o.Customer.ContactName
+            };
         }
 
         public int Add(Order newOrder)

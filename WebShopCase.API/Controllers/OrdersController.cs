@@ -9,13 +9,16 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using WebShopCase.API;
+using System.Web.Http.Cors;
 
 namespace WebShopCase.API.Controllers
 {
+   
     public class OrdersController : ApiController
     {
         private northwindCtx db = new northwindCtx();
 
+        
         // GET: api/Orders
         public IQueryable<Orders> GetOrders()
         {

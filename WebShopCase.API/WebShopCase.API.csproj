@@ -283,17 +283,46 @@
     <Compile Include="Utils.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="app2.js" />
     <Content Include="App_Data\northwind.mdf" />
     <Content Include="App_Data\northwind_log.ldf">
       <DependentUpon>northwind.mdf</DependentUpon>
     </Content>
     <Content Include="App_Data\Products.xml" />
     <Content Include="Areas\HelpPage\HelpPage.css" />
+    <Content Include="article.html" />
+    <Content Include="cart.html" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="controllers.js" />
+    <Content Include="demo.css" />
+    <Content Include="detail.html" />
+    <Content Include="dist\css\mobile-angular-ui-base.css" />
+    <Content Include="dist\css\mobile-angular-ui-base.min.css" />
+    <Content Include="dist\css\mobile-angular-ui-desktop.css" />
+    <Content Include="dist\css\mobile-angular-ui-desktop.min.css" />
+    <Content Include="dist\css\mobile-angular-ui-hover.css" />
+    <Content Include="dist\css\mobile-angular-ui-hover.min.css" />
+    <Content Include="dist\css\mobile-angular-ui-migrate.css" />
+    <Content Include="dist\css\mobile-angular-ui-migrate.min.css" />
+    <Content Include="dist\fonts\fontawesome-webfont.svg" />
+    <Content Include="dist\js\mobile-angular-ui.core.js" />
+    <Content Include="dist\js\mobile-angular-ui.core.min.js" />
+    <Content Include="dist\js\mobile-angular-ui.gestures.js" />
+    <Content Include="dist\js\mobile-angular-ui.gestures.min.js" />
+    <Content Include="dist\js\mobile-angular-ui.js" />
+    <Content Include="dist\js\mobile-angular-ui.migrate.js" />
+    <Content Include="dist\js\mobile-angular-ui.migrate.min.js" />
+    <Content Include="dist\js\mobile-angular-ui.min.js" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
+    <Content Include="home.html" />
+    <Content Include="img\1.jpg" />
+    <Content Include="img\2.jpg" />
+    <Content Include="img\3.jpg" />
+    <Content Include="img\4.jpg" />
+    <Content Include="img\5.jpg" />
     <Content Include="northwind.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>northwind.edmx</DependentUpon>
@@ -304,6 +333,8 @@
       <DependentUpon>northwind.edmx</DependentUpon>
       <LastGenOutput>northwind.cs</LastGenOutput>
     </Content>
+    <Content Include="order.html" />
+    <Content Include="profile.html" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Areas\HelpPage\Views\Web.config" />
@@ -332,6 +363,14 @@
     <Content Include="northwind.edmx.diagram">
       <DependentUpon>northwind.edmx</DependentUpon>
     </Content>
+    <Content Include="dist\fonts\fontawesome-webfont.eot" />
+    <Content Include="dist\fonts\fontawesome-webfont.ttf" />
+    <Content Include="dist\fonts\fontawesome-webfont.woff" />
+    <Content Include="dist\fonts\fontawesome-webfont.woff2" />
+    <Content Include="dist\js\mobile-angular-ui.core.min.js.map" />
+    <Content Include="dist\js\mobile-angular-ui.gestures.min.js.map" />
+    <Content Include="dist\js\mobile-angular-ui.migrate.min.js.map" />
+    <Content Include="dist\js\mobile-angular-ui.min.js.map" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -343,6 +382,11 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="index.html" />
+    <Content Include="services.js" />
+    <Content Include="sidebar.html" />
+    <Content Include="sidebarRight.html" />
+    <Content Include="thankyou.html" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -355,11 +399,12 @@
     <Content Include="Scripts\_references.js" />
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Views\Home\" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />

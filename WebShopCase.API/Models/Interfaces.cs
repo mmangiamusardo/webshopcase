@@ -17,16 +17,11 @@ namespace WebShopCase.Models
 
     public interface IOrderRepository
     {
-        IQueryable<Order> GetOrders();
-        Order GetOrder(int id);
+        IQueryable<OrderDTO> GetOrders();
+        OrderDTO GetOrder(int id);
         int Add(Order order);
     }
-
-    public interface IOrderDetailRepository
-    {
-        int Add(OrderDetail orderDet);
-    }
-
+    
     public interface ICustomer
     {
         Customer GetCustomer(string mailAddress);

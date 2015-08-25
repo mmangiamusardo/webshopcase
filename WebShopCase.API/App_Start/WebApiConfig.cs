@@ -21,7 +21,7 @@ namespace WebShopCase.API
             var container = new UnityContainer();
             container.RegisterType<IProductRepository, ProductRepository>(new HierarchicalLifetimeManager());
             container.RegisterType<IOrderRepository, OrderRepository>(new HierarchicalLifetimeManager());
-            container.RegisterType<IOrderDetailRepository, OrderRepository>(new HierarchicalLifetimeManager());
+            //container.RegisterType<IOrderDetailRepository, OrderRepository>(new HierarchicalLifetimeManager());
             config.DependencyResolver = new UnityResolver(container);
             
 
