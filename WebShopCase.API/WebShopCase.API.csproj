@@ -244,8 +244,8 @@
     <Compile Include="Models\OrderDTO.cs" />
     <Compile Include="Models\ProductDetailsDTO.cs" />
     <Compile Include="Models\ProductDTO.cs" />
-    <Compile Include="Models\Repositories.cs" />
     <Compile Include="Models\ProductRepositoryXML.cs" />
+    <Compile Include="Models\Repositories.cs" />
     <Compile Include="northwind.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
