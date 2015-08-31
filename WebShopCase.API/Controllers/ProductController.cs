@@ -31,7 +31,7 @@ namespace WebShopCase.API.Controllers
         [ResponseType(typeof(Product))]
         public IHttpActionResult GetProduct(int id)
         {
-            Product product = _repository.GetProduct(id);
+            ProductDTO product = _repository.GetProduct(id);
             if (product == null)
             {
                 return NotFound();

@@ -22,6 +22,9 @@ namespace WebShopCase.Models
 
         public string CategoryPct { get; set; }
         //public virtual Category Category { get; set; }
-        
+
+        public Nullable<short> UnitsInStock { get; set; }
+        public Nullable<short> UnitsOnOrder { get; set; }
+
     }
 }

@@ -149,9 +149,21 @@ namespace WebShopCase.Models
             return prods.AsQueryable();
         }
 
-        public Product GetProduct(int id)
+        public ProductDTO GetProduct(int id)
         {
-            return db.Products.Find(id);
+            var p = db.Products.Find(id);
+            return new ProductDTO()
+            {
+                ProductID = p.ProductID
+                ,ProductName = p.ProductName
+                ,QuantityPerUnit = p.QuantityPerUnit
+                ,UnitPrice = p.UnitPrice
+                ,ProductPct = p.Picture
+                ,CategoryName = p.Category.CategoryName
+                ,CategoryPct = ConvertTo.Base64(p.Category.Picture)
+                ,UnitsInStock = p.UnitsInStock
+                ,UnitsOnOrder = p.UnitsOnOrder
+            };
         }
 
         protected void Dispose(bool disposing)

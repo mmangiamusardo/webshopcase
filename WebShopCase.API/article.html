@@ -3,6 +3,7 @@
 </div>
 
 <div class="scrollable">
+    <x-my-directive></x-my-directive>
     <div class="scrollable-content">
         <div class="list-group">
             <div class="list-group-item media" ng-repeat="art in articles| startFrom:currentPage*pageSize | limitTo:pageSize">
@@ -13,7 +14,12 @@
                 </a>
 
                 <div class="media-body">
+                    <!--
                     <a ng-href="#/article/{{art.ProductID}}">
+                        <h3 class="media-heading" ng-bind="art.ProductName"></h3>
+                    </a>
+                    -->
+                    <a ui-set="{event: art.ProductID}">
                         <h3 class="media-heading" ng-bind="art.ProductName"></h3>
                     </a>
                     <div class="text-info">

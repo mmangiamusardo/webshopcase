@@ -12,7 +12,7 @@ namespace WebShopCase.Models
     public interface IProductRepository
     {
         IQueryable<ProductDTO> GetProducts();
-        Product GetProduct(int id);
+        ProductDTO GetProduct(int id);
     }
 
     public interface IOrderRepository

@@ -38,10 +38,6 @@ services.factory('srvShop', ['$http', function ($http) {
                                 return data;
                             });
             return promise;
-            /*
-            var req = $http.post('http://localhost:7054/api/order', order);
-            return req;
-            */
         },
 
         getOrder: function () {

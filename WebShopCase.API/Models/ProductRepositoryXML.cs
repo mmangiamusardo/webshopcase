@@ -39,9 +39,9 @@ namespace WebShopCase.Models
             return new List<ProductDTO>().AsQueryable();
         }
 
-        public Product GetProduct(int id)
+        public ProductDTO GetProduct(int id)
         {
-            return products.Find(p => p.ProductID == id);
+            return new ProductDTO();
         }
 
    

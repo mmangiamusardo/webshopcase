@@ -8,9 +8,25 @@ var HomeCtrl = function ($scope) {
 };
 ctrl.controller('HomeCtrl', ['$scope', HomeCtrl]);
 
+var ArticleCtrl = function ($scope, $rootScope, articles, srvShop, SharedState) {
 
-//ctrl.controller('LibraryCtrl', ['$scope', 'books', 'movies', function ($scope, books, movies) { }]);
-var ArticleCtrl = function ($scope, $rootScope, articles) {
+    //watch model state
+    $scope.$watch(function () {
+        var newVal = SharedState.get('event');
+        return newVal;
+    }, function (newValue) {
+        console.log('event changed to ' + newValue);
+        if (newValue) {
+
+            var promiseArticle = srvShop.getArticle(newValue);
+            promiseArticle.then(function (a) {
+                $scope.article = a.data;
+            }, function (err) {
+                alert(err);
+            });
+        }
+    });
+
     $scope.articles = articles.data;
   
     $scope.currentPage = 0;
@@ -26,7 +42,7 @@ var ArticleCtrl = function ($scope, $rootScope, articles) {
         $rootScope.updateCart();
     };
 };
-ctrl.controller('ArticleCtrl', ['$scope', '$rootScope', 'articles', ArticleCtrl]);
+ctrl.controller('ArticleCtrl', ['$scope', '$rootScope', 'articles', 'srvShop','SharedState', ArticleCtrl]);
 
 
 var ArticleDetailsCtrl = function ($scope, $rootScope, article) {

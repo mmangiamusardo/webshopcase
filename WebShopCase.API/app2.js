@@ -27,17 +27,6 @@
 
     }]); // end app.run
 
-    /*
-    app.config(['$httpProvider', function ($httpProvider) {
-        $httpProvider.defaults.useXDomain = true;
-        //$httpProvider.defaults.withCredentials = true;
-        delete $httpProvider.defaults.headers.common["X-Requested-With"];
-        //$httpProvider.defaults.headers.common["Accept"] = "application/json";
-        $httpProvider.defaults.headers.common["Content-Type"] = "application/json";
-    }
-    ]);
-    */
-
     app.config(['$routeProvider', function ($routeProvider) {
         $routeProvider.when('/', {
             templateUrl: 'home.html',
@@ -55,15 +44,9 @@
         });
 
         $routeProvider.when('/article/:id', {
-            templateUrl: 'detail.html',
-            controller: 'ArticleDetailsCtrl',
+            templateUrl: 'article.html',
+            controller: 'ArticleCtrl',
             resolve: {
-                /*
-                productId: ['$route', function ($route) {
-                    var params = $route.current.params;
-                    params.productId =  params.productId || 123;
-                }],
-                */
                 article: function (srvShop, $route) {
                     return srvShop.getArticle($route.current.params.id);
                 }
@@ -87,7 +70,7 @@
 
     // Controller definition
     var MainController = function ($rootScope, $scope, $log) {
-        
+
         $scope.sum = function(items, prop){
             return items.reduce( function(a, b){
                 return a + b[prop];
@@ -154,5 +137,18 @@
             start = +start; //parse to int
             return input.slice(start);
         }
-    }); 
+    });
+
+    app.directive('myDirective', function () {
+        return {
+            restrict: 'E',
+            templateUrl: 'detail.html',
+            link: function (scope, element, attrs) {
+                scope.do = function () {
+                    console.log('doing something...');
+                }
+            }
+        };
+    });
+
 }());
