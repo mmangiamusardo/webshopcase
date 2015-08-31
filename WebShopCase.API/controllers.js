@@ -57,7 +57,16 @@ var OrderCtrl = function ($scope, $rootScope, srvShop) {
     $scope.initialize();
    
     $scope.save = function () {
+
+        var details = new Array();
+
+        for (var i in $scope.subtotals)
+        {
+            details.push($scope.subtotals[i]);
+        }
+
         var Order = {};
+        Order.OrderDetails = details;
         Order.FirstName = $scope.firstName;
         Order.LastName = $scope.lastName;
         Order.Address = $scope.address;

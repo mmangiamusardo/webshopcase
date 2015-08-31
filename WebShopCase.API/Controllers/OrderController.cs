@@ -10,6 +10,7 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using WebShopCase.Models;
 using System.Web.Http.Cors;
+using Newtonsoft.Json.Serialization;
 
 using WebShopCase.API;
 
@@ -54,18 +55,17 @@ namespace WebShopCase.API.Controllers
                 return BadRequest(ModelState);
             }
 
-            OrderDetail d = new OrderDetail()
+            var details = new List<OrderDetail>();
+            foreach (var det in dto.OrderDetails) 
             {
-                //OrderID = o.OrderID,
-                ProductID = 1,
-                Quantity = 1,
-                UnitPrice = 1,
-                Discount = 0.0f
+                details.Add(new OrderDetail()
+                {
+                    ProductID = det.ProductId,
+                    Quantity = det.Quantity,
+                    UnitPrice = det.UnitPrice,
+                    Discount = 0.0f
+                });
             };
-
-            ICollection<OrderDetail> details = new List<OrderDetail>();
-            details.Add(d);
-
 
             Order o = new Order()
             {

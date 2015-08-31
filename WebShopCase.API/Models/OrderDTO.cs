@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json.Serialization;
+using Newtonsoft.Json;
+
+
 
 namespace WebShopCase.Models
 {
@@ -23,5 +27,25 @@ namespace WebShopCase.Models
         public string Country { get; set; }
 
         public string CustomerName { get; set; }
+
+        [JsonProperty("OrderDetails")]
+        public List<OrderDetailDTO> OrderDetails {get; set;}
+    }
+
+    public class OrderDetailDTO 
+    {
+        [JsonProperty("productId")]
+        public int ProductId { get; set; }
+
+        [JsonProperty("productPrice")]
+        public decimal UnitPrice { get; set; }
+
+        [JsonProperty("totalQty")]
+        public short Quantity { get; set; }
+
+        /*
+        [JsonProperty("discount")]
+        public float Discount { get; set; }
+        */
     }
 }
