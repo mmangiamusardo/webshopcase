@@ -3,6 +3,15 @@
 </div>
 <div class="scrollable">
     <div class="scrollable-content">
+        <div class="list-group-item margin-bottom-0" ng-show="sizeCart > 0">
+            <label>Save this cart</label>
+            <ui-switch ng-model='rememberMe'></ui-switch>
+        </div>
+        <div class="list-group-item margin-bottom-0" ng-show="sizeCart > 0">
+            <a class="btn btn-primary btn-block" ng-href="#/order">
+                Go to Check out
+            </a>
+        </div>
         <div class="list-group-item list-group-item-home" style="height: 100%">
             <div class="list-group text-center" ng-show="sizeCart==0">
             <div class="list-group-item list-group-item-home">
@@ -69,14 +78,6 @@
                 </tbody>
             </table>
         </div>
-        <div class="list-group-item margin-bottom-0" ng-show="sizeCart > 0">
-            <label>Save this cart</label>
-            <ui-switch ng-model='rememberMe'></ui-switch>
-        </div>
-        <div class="list-group-item margin-bottom-0" ng-show="sizeCart > 0">
-            <a class="btn btn-primary btn-block" ng-href="#/order">
-                Go to Check out
-            </a>
-        </div>
+        
     </div>
 </div>
