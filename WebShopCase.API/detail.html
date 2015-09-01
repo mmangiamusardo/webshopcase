@@ -35,7 +35,10 @@
                                                 <div class="input-group" style="max-width: 130px;">
                                                     <div class="input-group-addon" data-ng-click="addToCart(article.ProductID, 1, article.UnitPrice, article.ProductName, article.ProductPct)">+</div>
                                                     <input class="form-control ng-pristine ng-valid needsclick" type="text" data-ng-model="subtotals[article.ProductID].totalQty">
+                                                    <!--
                                                     <div class="input-group-addon" data-ng-click="addToCart(article.ProductID, -1, (-1) * article.UnitPrice, article.ProductName, article.ProductPct)">-</div>
+                                                    -->
+                                                    <div class="input-group-addon" data-ng-click="removeFromCart(article.ProductID)">-</div>
                                                 </div>
                                             </div>
                                         </form>

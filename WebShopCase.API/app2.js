@@ -3,35 +3,38 @@
     // main application "wscApp" and dependencies
     var app = angular.module("wscApp", ['wsc.services', 'wsc.controllers','ngRoute', 'mobile-angular-ui', 'mobile-angular-ui.gestures']);
 
-    /*
+    
     app.run(function ($transform) {
         window.$transform = $transform;
     });
-    */
+    
 
-    app.run(['$rootScope', function ($rootScope) {
+    app.run(['$rootScope', '$location', function ($rootScope, $location) {
 
-        $rootScope.$on('$routeChangeStart', function (e, curr, prev) {
-            if (curr.$$route && curr.$$route.resolve) {
-                // Show a loading message until promises are not resolved
-                // $root.loadingView = true;
-                $rootScope.loading = true;
+        $rootScope.$on('$locationChangeStart', function (event, next, current) {
+            if (next.indexOf('?uiSidebarLeft') > 0) {
+                event.preventDefault();
             }
         });
 
+        
+        $rootScope.$on('$routeChangeStart', function (e, curr, prev) {
+            if (curr.$$route && curr.$$route.resolve) {
+                // Show a loading message until promises are not resolved
+                //$rootScope.loading = true;
+            }
+        });
+        
+
         $rootScope.$on('$routeChangeSuccess', function (e, curr, prev) {
             // Hide loading message
-            // $root.loadingView = false;
             $rootScope.loading = false;
         });
 
     }]); // end app.run
 
     app.config(['$routeProvider', function ($routeProvider) {
-        $routeProvider.when('/', {
-            templateUrl: 'home.html',
-            controller: 'HomeCtrl'
-        });
+        //!$route.current.params.uiSidebarLeft
 
         $routeProvider.when('/article', {
             templateUrl: 'article.html',
@@ -39,16 +42,6 @@
             resolve: {
                 articles: function (srvShop) {
                     return srvShop.getArticles();
-                }
-            }
-        });
-
-        $routeProvider.when('/article/:id', {
-            templateUrl: 'article.html',
-            controller: 'ArticleCtrl',
-            resolve: {
-                article: function (srvShop, $route) {
-                    return srvShop.getArticle($route.current.params.id);
                 }
             }
         });
@@ -63,7 +56,17 @@
             controller: 'OrderCtrl'
         });
 
-        $routeProvider.otherwise({ redirectTo: '/' });
+        $routeProvider.when('/process/:id', {
+            templateUrl: 'process.html',
+            controller: 'ProcessCtrl',
+            resolve: {
+                order: function (srvShop, $route) {
+                    return srvShop.getOrder($route.current.params.id);
+                }
+            }
+        });
+
+        $routeProvider.otherwise({ redirectTo: '/article' });
 
     }]);
 
@@ -88,12 +91,14 @@
         $scope.VAT = 0.22;
         $scope.VATdescr = '22%';
 
-        $rootScope.cart = [];
+        $rootScope.clearCart = function () {
+            $rootScope.cart = [];
+            $scope.subtotals = [];
 
-        $scope.subtotals = [];
-
-        $scope.sizeCart = 0;
-        $scope.totalCart = 0.0;
+            $scope.sizeCart = 0;
+            $scope.totalCart = 0.0;
+        };
+        $rootScope.clearCart();
 
         $rootScope.cartTotal = function (total) {
             var _rtScoope = this;
@@ -126,6 +131,8 @@
             $scope.totalCart = $scope.sum(_rtScope.cart, 'unitPrice');
         };
         $rootScope.updateCart();
+
+        
     };
 
     // Controller registration

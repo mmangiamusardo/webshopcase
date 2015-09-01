@@ -1,9 +1,13 @@
-﻿<div class="scrollable">
+﻿<div ui-content-for="title">
+    <span></span>
+</div>
+<div class="scrollable">
     <div class="scrollable-content section">
         <form role="form" ng-submit='save()'>
 
             <fieldset disabled class="section-break">
                 <legend>Order resume</legend>
+                Go to review or modify your cart <a href="#/cart">Cart <i class="fa fa-shopping-cart"></i></a>
                 <div class="form-group">
                     <label for="disabledQty" class="control-label">Total Items</label>
                     <div class="">

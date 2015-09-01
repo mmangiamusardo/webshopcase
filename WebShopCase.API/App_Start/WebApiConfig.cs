@@ -19,9 +19,9 @@ namespace WebShopCase.API
         {
             // IOC (Unity)          
             var container = new UnityContainer();
-            container.RegisterType<IProductRepository, ProductRepository>(new HierarchicalLifetimeManager());
+            //container.RegisterType<IProductRepository, ProductRepository>(new HierarchicalLifetimeManager());
+            container.RegisterType<IProductRepository, ProductRepositoryXML>(new HierarchicalLifetimeManager());
             container.RegisterType<IOrderRepository, OrderRepository>(new HierarchicalLifetimeManager());
-            //container.RegisterType<IOrderDetailRepository, OrderRepository>(new HierarchicalLifetimeManager());
             config.DependencyResolver = new UnityResolver(container);
             
 
@@ -43,31 +43,12 @@ namespace WebShopCase.API
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
-
-            // config.Formatters.JsonFormatter.SupportedMediaTypes.Add(new System.Net.Http.Headers.MediaTypeHeaderValue("text/html"));
-
-            /*
-            config.Formatters.JsonFormatter
-            .SerializerSettings
-            .ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
-            */
-
-            /*
-            json.SerializerSettings.PreserveReferencesHandling =
-                Newtonsoft.Json.PreserveReferencesHandling.Objects;
-
             
-            */
-
-            /*
-            var json = GlobalConfiguration.Configuration.Formatters.JsonFormatter;
             
-            json.SerializerSettings.PreserveReferencesHandling =
-                Newtonsoft.Json.PreserveReferencesHandling.All;
-            */
-
+            // Remove default xml formatter
             var json = config.Formatters.JsonFormatter;
             config.Formatters.Remove(config.Formatters.XmlFormatter);
+            
         }
     }
 }

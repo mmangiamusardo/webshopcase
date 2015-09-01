@@ -3,11 +3,6 @@
 // Controller
 var ctrl = angular.module('wsc.controllers', []);
 
-var HomeCtrl = function ($scope) {
-
-};
-ctrl.controller('HomeCtrl', ['$scope', HomeCtrl]);
-
 var ArticleCtrl = function ($scope, $rootScope, articles, srvShop, SharedState) {
 
     //watch model state
@@ -41,23 +36,27 @@ var ArticleCtrl = function ($scope, $rootScope, articles, srvShop, SharedState) 
         $rootScope.cartTotal();
         $rootScope.updateCart();
     };
+
+    $scope.removeFromCart = function (id) {
+        for (var i = $rootScope.cart.length - 1; i >= 0; i--) {
+            if ($rootScope.cart[i].productId === id) {
+                $rootScope.cart.splice(i, 1);
+                $rootScope.cartTotal();
+                $rootScope.updateCart();
+                return;
+            }
+        }
+    };
 };
 ctrl.controller('ArticleCtrl', ['$scope', '$rootScope', 'articles', 'srvShop','SharedState', ArticleCtrl]);
 
+var OrderCtrl = function ($scope, $rootScope, $location, srvShop) {
 
-var ArticleDetailsCtrl = function ($scope, $rootScope, article) {
-    $scope.articleDetail = article.data;
-
-    $scope.addToCart = function (id, qty, price, name, pct) {
-        $rootScope.cart.push({ productId: id, cartQty: qty, unitPrice: price, productName: name, picture: pct });
-        $rootScope.cartTotal();
-        $rootScope.updateCart();
+    $scope.changeView = function (id) {
+        var proc = '/process/' + id;
+        $location.path(proc);
     };
-};
-ctrl.controller('ArticleDetailsCtrl', ['$scope', '$rootScope', 'article', ArticleDetailsCtrl]);
 
-
-var OrderCtrl = function ($scope, $rootScope, srvShop) {
     //Function to Reset Scope variables
     $scope.initialize = function() {
         $scope.firstName = '';
@@ -95,13 +94,14 @@ var OrderCtrl = function ($scope, $rootScope, srvShop) {
         promiseOrder.then(function (d) {
             $scope.OrderId = d.data.OrderID;
 
+            $scope.changeView($scope.OrderId);
+
         }, function (err) {
             alert(err);
         });
     };
 };
-ctrl.controller('OrderCtrl', ['$scope', '$rootScope','srvShop', OrderCtrl]);
-
+ctrl.controller('OrderCtrl', ['$scope', '$rootScope','$location','srvShop', OrderCtrl]);
 
 var CartCtrl = function ($scope, $rootScope) {
 
@@ -110,5 +110,25 @@ var CartCtrl = function ($scope, $rootScope) {
         $rootScope.cartTotal();
         $rootScope.updateCart();
     };
+
+    $scope.removeFromCart = function (id) {
+        for (var i = $rootScope.cart.length - 1; i >= 0; i--)
+        {
+            if ($rootScope.cart[i].productId === id) {
+                $rootScope.cart.splice(i, 1);
+                $rootScope.cartTotal();
+                $rootScope.updateCart();
+                return;
+            }
+        }
+    };
+
 };
 ctrl.controller('CartCtrl', ['$scope', '$rootScope', CartCtrl]);
+
+var ProcessCtrl = function ($scope, $rootScope, order) {
+    $scope.processedOrder = order.data;
+
+    $rootScope.clearCart();
+};
+ctrl.controller('ProcessCtrl', ['$scope', '$rootScope','order', ProcessCtrl]);

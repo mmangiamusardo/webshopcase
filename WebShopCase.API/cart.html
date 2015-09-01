@@ -4,6 +4,20 @@
 <div class="scrollable">
     <div class="scrollable-content">
         <div class="list-group-item list-group-item-home" style="height: 100%">
+            <div class="list-group text-center" ng-show="sizeCart==0">
+            <div class="list-group-item list-group-item-home">
+                <div>
+                    <i class="fa fa-shopping-cart feature-icon text-primary"></i>
+                </div>
+                <div>
+                    <h3 class="home-heading">Sorry!</h3>
+                    <p>Cart is Empty</p>
+                    Go to article list to buy some 
+                    <a href="#/article">Articles <i class="fa fa-chevron-right"></i></a>
+                </div>
+            </div>
+        </div>
+            
             <table class="table-bordered table-striped table-condensed cf" ng-show="sizeCart>0">
                 <thead>
                     <tr>
@@ -32,8 +46,12 @@
                                         <div class="input-group-addon"
                                              data-ng-click="addToCart(st.productId, 1, st.productPrice, st.productName,st.productPct)">+</div>
                                         <input class="form-control ng-pristine ng-valid needsclick" type="text" data-ng-model="st.totalQty">
+                                        <!--
                                         <div class="input-group-addon" 
                                              data-ng-click="addToCart(st.productId, -1, (-1) * st.productPrice, st.productName,st.productPct)">-</div>
+                                        -->
+                                        <div class="input-group-addon" 
+                                             data-ng-click="removeFromCart(st.productId)">-</div>
                                     </div>
                                 </div>
                             </form>
@@ -42,10 +60,8 @@
                             <img style="width:20%" data-ng-src="{{st.productPct}}" alt="..." ng-show="st.productPct">
                             <img style="width:20%" ng-hide="st.productPct"
                                 src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIAAAACACAMAAAD04JH5AAAAA3NCSVQICAjb4U/gAAAACXBIWXMAAAN2AAADdgF91YLMAAAAGXRFWHRTb2Z0d2FyZQB3d3cuaW5rc2NhcGUub3Jnm+48GgAAADNQTFRF////AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8YBMDAAAABB0Uk5TAAEKJipgcH+AoLO11eb19szmkd4AAAH3SURBVHja7drrcoIwEAVgLVm6wVB4/6etl3FMaBJYdkE6nv3ZGZpPzzEywdMJg8F8/Iw7DwAAAHBcwNs3IgAAAOAwgN03JgAAAOCwgN32HwAAAAAAAAAA4F8AGu76vuNmxTrk9IBzOzz+NLRn6fruh9WA8+V1/3QRCr7CGNSANr6Da2UAf73EKQHNEAMGUQ/odgkrAd/pTSyLCnC7IigBXQroRAW4j9MB+hTQywpQftO2B9DzkvCeCB4FKGewdQmfBShes/XH0EcXhTdsRJS8bW73rTgqQCmDTb+M4gKUMtj069hPDwGc/Q0J8dICFDJQAq4h88ICFDLQAe4h87ICFDLQAXxlU/K5kyC2BVDl40XZo6hgCniFzEsKkM9AAaht89kCZKkKgK/8Y186Dgx2AKq8NCofSDorwJ+Qeb4AuQzWAjIh82wBchmsBfjKi/PVQ2FnAqDK20v1U2m2AJRC5pkCZDJYBSiHzPUCZDJYBaiEzH72yQCrAaR7NBG0gLmQR1EGcsB8yKIM5ACvXT/NQAygUT9OAVAXYJqBEKAvwDQDIcCPJuPWAshm/TgDEcCkAJMMJACbAkwykAC82fpRBgIA2a0fZbAcYFaANIPFAMMCJBksBnjT9V8Z4IkJAAAAUFwHAAAAAGD3HzQCAAAAhwNgMJiPm1/nFagamXGcMgAAAABJRU5ErkJgggc8693bae7cb0dd74b7acfd22da56e373" /> 
-                                <a ng-href="#/article/{{st.productId}}">
-                                    <span class="media-heading" ng-bind="st.productName"></span>
-                                </a>
-                        </td>
+                             <span class="media-heading" ng-bind="st.productName"></span>
+                                
                         <td class="numeric">{{st.total}}</td>
                         <td class="numeric">{{VATdescr}}</td>
                         <td class="numeric">{{st.total + (st.total * VAT)}}</td>

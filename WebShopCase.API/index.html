@@ -14,38 +14,20 @@
     <link rel="stylesheet" href="dist/css/mobile-angular-ui-desktop.min.css"/>
     <link rel="stylesheet" href="demo.css"/>
 
-    
     <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
     <!--
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     -->       
-       
 
     <script data-require="angular.js@1.4.3" data-semver="1.4.3" src="dist/js/angular.js"></script>
     <script src="dist/js/angular-route.js"></script>
-    <!--
-    <script src="dist/js/bootstrap.min.js"></script>
-    -->
+    
     <script src="dist/js/mobile-angular-ui.min.js"></script>
 
-    <!-- Required to use $touch, $swipe, $drag and $translate services -->
-    <script src="dist/js/mobile-angular-ui.gestures.min.js"></script>
-    
     <script src="app2.js"></script>
     <script src="controllers.js"></script>
     <script src="services.js"></script>
-    <!--
-    <script src="shop.js"></script>
-    -->
-
-    <!-- Latest compiled and minified CSS 
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.8.1/bootstrap-table.min.css">
-    -->
-
-    <!-- Latest compiled and minified JavaScript 
-    <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.8.1/bootstrap-table.min.js"></script>
-    -->
-</head>
+ </head>
 
 <body   ng-app="wscApp"
         ui-prevent-touchmove-defaults
@@ -55,32 +37,31 @@
     <div ng-include="'sidebar.html'"
          ui-track-as-search-param='true'
          class="sidebar sidebar-left"></div>
-
-    <div ng-include="'sidebarRight.html'"
-        class="sidebar sidebar-right"></div>
-
-    <div class="app"
+    
+    <div class="app" 
          ui-swipe-right='Ui.turnOn("uiSidebarLeft")'
          ui-swipe-left='Ui.turnOff("uiSidebarLeft")'>
-
-    <!-- Navbars -->
-    <div class="navbar navbar-app navbar-absolute-top">
-        <div class="navbar-brand navbar-brand-center" ui-yield-to="title">
-            Web Shop Case
-        </div>
-        <div class="btn-group pull-left">
-            <div ui-toggle="uiSidebarLeft" class="btn sidebar-toggle">
-                <i class="fa fa-bars"></i> Menu
+    
+        <!-- Navbars -->
+        <div class="navbar navbar-app navbar-absolute-top">
+            <div class="navbar-brand navbar-brand-center" ui-yield-to="title">
+                Web Shop Case
             </div>
+            <a class="btn-group pull-left">
+                <div ui-toggle="uiSidebarLeft" class="btn sidebar-toggle">
+                    <i class="fa fa-bars"></i> Menu
+                </div>
+            </a>
 
-        </div>
-
-        <div class="btn-group pull-right" ui-yield-to="navbarAction">
-            <div class="btn">
-                <i class="fa fa-shopping-cart fa-1x"></i><span style="padding-left:5px;padding-right:5px">{{sizeCart}}</span>
-                <i class="fa fa-eur" style="padding-left:5px"></i><span style="padding-left:5px;padding-right:5px">{{totalCart}}</span>
+            <div class="btn-group pull-right" ui-yield-to="navbarAction">
+                <div class="btn">
+                    <i class="fa fa-shopping-cart fa-1x"></i>
+                    <span style="padding-left:5px;padding-right:5px">{{sizeCart}}</span>
+                
+                    <i class="fa fa-eur" style="padding-left:5px"></i>
+                    <span style="padding-left:5px;padding-right:5px">{{totalCart}}</span>
+                </div>
             </div>
-        </div>
 
         <div class="btn-group pull-right">
             <a ui-turn-on='myDropdown{{idx}}' class='btn'>
@@ -102,28 +83,26 @@
                 <li><a href="#"><i class="fa fa-sign-out fa-fw"></i> Log out</a></li>
             </ul>
         </div>
-    </div>
-
-    <div class="navbar navbar-app navbar-absolute-bottom">
-        <div class="btn-group justified">
-            <a href="/docs" class="btn btn-navbar"><i class="fa fa-home fa-navbar"></i> Docs</a>
-            <a href="https://github.com/mcasimir/mobile-angular-ui" class="btn btn-navbar"><i
-                    class="fa fa-github fa-navbar"></i> Sources</a>
-            <a href="https://github.com/mcasimir/mobile-angular-ui/issues" class="btn btn-navbar"><i
-                    class="fa fa-exclamation-circle fa-navbar"></i> Issues</a>
         </div>
-    </div>
 
-    <!-- App Body -->
-    <div class="app-body" ng-class="{loading: loading}">
-        <div ng-show="loading" class="app-content-loading">
-            <i class="fa fa-spinner fa-spin loading-spinner"></i>
+        <div class="navbar navbar-app navbar-absolute-bottom">
+            <div class="btn-group justified">
+                <a href="/#/" class="btn btn-navbar"><i class="fa fa-home fa-navbar"></i> Docs</a>
+                <a href="https://github.com/mmangiamusardo/webshopcase" class="btn btn-navbar"><i
+                        class="fa fa-github fa-navbar"></i> Sources</a>
+                <a href="/#/" class="btn btn-navbar"><i
+                        class="fa fa-exclamation-circle fa-navbar"></i> Issues</a>
+            </div>
         </div>
-        <div class="app-content">
-            <ng-view></ng-view>
-        </div>
-    </div>
 
+        <!-- App Body -->
+        <div class="app-body" ng-class="{loading: loading}">
+            <div ng-show="loading" class="app-content-loading">
+                <i class="fa fa-spinner fa-spin loading-spinner"></i>
+            </div>
+            <ng-view class="app-content" ng-hide="loading"></ng-view>
+        </div>
+    
     </div>
 
     <div ui-yield-to="modals"></div>

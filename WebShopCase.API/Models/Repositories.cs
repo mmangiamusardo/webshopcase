@@ -139,11 +139,14 @@ namespace WebShopCase.Models
                             UnitPrice = p.UnitPrice
                             ,
                             ProductPct = p.Picture
-                            ,
-                            CategoryID = p.CategoryID
-                            ,
-                            CategoryName = p.Category.CategoryName
-                            //,CategoryPct = ConvertTo.Base64(p.Category.Picture)
+
+                            /*
+                            ,CategoryName = p.Category.CategoryName
+                            ,CategoryPct = ConvertTo.Base64(p.Category.Picture)
+                            ,QuantityPerUnit = p.QuantityPerUnit
+                            ,UnitsInStock = p.UnitsInStock
+                            ,UnitsOnOrder = p.UnitsOnOrder
+                            */
                         };
 
             return prods.AsQueryable();
@@ -152,6 +155,8 @@ namespace WebShopCase.Models
         public ProductDTO GetProduct(int id)
         {
             var p = db.Products.Find(id);
+            if (p == null)
+                return new ProductDTO();
             return new ProductDTO()
             {
                 ProductID = p.ProductID
