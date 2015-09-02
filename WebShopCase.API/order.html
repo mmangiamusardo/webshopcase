@@ -3,7 +3,7 @@
 </div>
 <div class="scrollable">
     <div class="scrollable-content section">
-        <form role="form" ng-submit='save()'>
+        <form role="form" ng-submit='save()' name="orderForm">
 
             <fieldset disabled class="section-break">
                 <legend>Order resume</legend>
@@ -32,44 +32,74 @@
                 <legend>Customer Information</legend>
                 <div class="form-group">
                     <label>First Name</label>
-                    <input type="text"
+                    <span style="color:red" ng-show="orderForm.firstName.$dirty && orderForm.firstName.$invalid">
+                        <span ng-show="orderForm.firstName.$error.required"> is required.</span>
+                    </span>
+                    <input type="text" required
                            class="form-control"
                            placeholder=""
-                           ng-model="firstName">
+                           ng-model="firstName" name="firstName">
+                   
                     <label>Last Name</label>
-                    <input type="text"
-                            class="form-control"
-                            placeholder=""
-                           ng-model="lastName">
+                     <span style="color:red" ng-show="orderForm.lastName.$dirty && orderForm.lastName.$invalid">
+                        <span ng-show="orderForm.lastName.$error.required"> is required.</span>
+                    </span>
+                    <input type="text" required
+                           class="form-control"
+                           placeholder=""
+                           ng-model="lastName" name="lastName">
                 </div>
                 <div class="form-group">
                     <label class="control-label">Address</label>
-                    <input type="text"
+                    <span style="color:red" ng-show="orderForm.address.$dirty && orderForm.address.$invalid">
+                        <span ng-show="orderForm.address.$error.required"> is required.</span>
+                    </span>
+                    <input type="text" required
                            class="form-control"
                            placeholder=""
-                           ng-model="address">
+                           ng-model="address" name="address">
+                    
+                    
                     <label class="control-label">Address Number</label>
-                    <input type="number"
-                            class="form-control"
-                            placeholder=""
-                           ng-model="addressNum">
+                    <span style="color:red" ng-show="orderForm.addressNum.$dirty && orderForm.addressNum.$invalid">
+                        <span ng-show="orderForm.addressNum.$error.required"> is required.</span>
+                    </span>
+                    <input type="number" required
+                           class="form-control"
+                           placeholder=""
+                           ng-model="addressNum" name="addressNum">
+                    
+                    
                     <label class="control-label">Zip Code</label>
-                    <input type="number"
-                            class="form-control"
-                            placeholder=""
-                           ng-model="zipCode">
+                    <span style="color:red" ng-show="orderForm.zipCode.$dirty && orderForm.zipCode.$invalid">
+                        <span ng-show="orderForm.zipCode.$error.required"> is required.</span>
+                    </span>
+                    <input type="number" required
+                           class="form-control"
+                           placeholder=""
+                           ng-model="zipCode" name="zipCode">
+                    
+                    
                     <label class="control-label">City</label>
-                    <input type="text"
-                            class="form-control"
-                            placeholder=""
-                           ng-model="city">
+                    <span style="color:red" ng-show="orderForm.city.$dirty && orderForm.city.$invalid">
+                        <span ng-show="orderForm.city.$error.required"> is required.</span>
+                    </span>
+                    <input type="text" required
+                           class="form-control"
+                           placeholder=""
+                           ng-model="city" name="city">
                 </div>
+                
                 <div class="form-group has-success has-feedback">
                     <label>Email</label>
-                    <input type="email"
+                    <span style="color:red" ng-show="orderForm.email.$dirty && orderForm.email.$invalid">
+                        <span ng-show="orderForm.email.$error.required"> is required.</span>
+                        <span ng-show="orderForm.email.$error.email">Invalid email address.</span>
+                    </span>
+                    <input type="email" required
                             ng-model="email"
                             class="form-control"
-                            placeholder="Enter email">
+                            placeholder="Enter email" name="email">
                 </div>
 
             </fieldset>
